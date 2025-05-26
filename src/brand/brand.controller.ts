@@ -1,19 +1,19 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { BrandsAddDto } from './dtos/brands_add.dto';
-import { Brand } from './brands.schema';
-import { BrandsService } from './brands.service';
+import { BrandAddDto } from './dtos/brand_add.dto';
+import { Brand } from './brand.schema';
+import { BrandService } from './brand.service';
 
-@Controller('brand')
-export class BrandsController {
-  constructor(private readonly brandsService: BrandsService) {}
+@Controller('brands')
+export class BrandController {
+  constructor(private readonly brandService: BrandService) {}
 
   @Get()
   async getAll(): Promise<Brand[]> {
-    return this.brandsService.findAll();
+    return this.brandService.findAll();
   }
 
   @Post()
-  async create(@Body() brandAddDto: BrandsAddDto): Promise<Brand> {
-    return this.brandsService.create(brandAddDto);
+  async create(@Body() brandAddDto: BrandAddDto): Promise<Brand> {
+    return this.brandService.create(brandAddDto);
   }
 }

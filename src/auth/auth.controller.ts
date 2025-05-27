@@ -60,6 +60,7 @@ export class AuthController {
         if (validation) {
           return this.jwtService.sign({
             id: currentUser._id,
+            isAdmin: currentUser.isAdmin,
           });
         }
         throw new HttpException('Wrong password', HttpStatus.UNAUTHORIZED);

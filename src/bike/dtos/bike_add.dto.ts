@@ -6,4 +6,7 @@ export class BikeAddDto {
 
   @IsNumber()
   power: number;
+
+  @IsString()
+  brand: string;
 }

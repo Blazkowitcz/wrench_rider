@@ -4,6 +4,7 @@ import { BrandModule } from './brand/brand.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { BikeModule } from './bike/bike.module';
+import { UserBikeModule } from './user_bike/user_bike.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     AuthModule,
     BikeModule,
+    UserBikeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

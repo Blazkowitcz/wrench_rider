@@ -3,7 +3,7 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({ versionKey: false })
 export class User {
   _id: Types.ObjectId;
 
@@ -21,6 +21,10 @@ export class User {
 
   @Prop({ required: true })
   isAdmin: boolean;
+}
+
+export interface UserRequest extends Request {
+  user: { id: string; isAdmin: boolean };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

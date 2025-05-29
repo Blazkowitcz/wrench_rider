@@ -14,4 +14,12 @@ export class BikeService {
     const bike = new this.bikeModel(bikeAddDto);
     return await bike.save();
   }
+
+  async getAllBikes(): Promise<Bike[]> {
+    return this.bikeModel.find().populate('brand');
+  }
+
+  async getBikesFromBrand(brandId: string): Promise<Bike[]> {
+    return this.bikeModel.find({ brand: brandId }).populate('brand').exec();
+  }
 }

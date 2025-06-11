@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Body,
   UseGuards,
   Param,
@@ -12,6 +13,7 @@ import { UserBikeAddDto } from './dtos/user_bike_add.dto';
 import { UserBike } from './user_bike.schema';
 import { UserBikeService } from './user_bike.service';
 import { UserRequest } from '../user/user.schema';
+import { UserBikeEditDto } from './dtos/user_bike_edit.dto';
 
 @Controller('userbikes')
 export class UserBikeController {
@@ -27,5 +29,14 @@ export class UserBikeController {
   @Get()
   async getAllBikesFromUser(@Req() request: UserRequest): Promise<UserBike[]> {
     return this.userBikeService.getAllBikesFromUser(request.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':userBikeId')
+  async setUserBike(
+    @Param('userBikeId') brandId: string,
+    @Body() userBikeEditDto: UserBikeEditDto,
+  ): Promise<UserBike | null> {
+    return this.userBikeService.setUserBike(brandId, userBikeEditDto);
   }
 }

@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserBike, UserBikeDocument } from './user_bike.schema';
 import { UserBikeAddDto } from './dtos/user_bike_add.dto';
+import { UserBikeEditDto } from './dtos/user_bike_edit.dto';
 
 @Injectable()
 export class UserBikeService {
@@ -32,5 +33,26 @@ export class UserBikeService {
         select: { _id: 0 },
       })
       .exec();
+  }
+
+  async getUserBikeFromUser(
+    userBikeId: string,
+    userId: string,
+  ): Promise<UserBike | null> {
+    return this.userBikeModel.findOne({ _id: userBikeId, user: userId }).exec();
+  }
+
+  /**
+   * Update User Bike data
+   * @param userBikeId
+   * @param data
+   */
+  async setUserBike(
+    userBikeId: string,
+    data: UserBikeEditDto,
+  ): Promise<UserBike | null> {
+    return this.userBikeModel.findOneAndUpdate({ _id: userBikeId }, data, {
+      new: true,
+    });
   }
 }
